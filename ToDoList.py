@@ -1,3 +1,16 @@
+#  ██████   █████  ███████ ███████ ████████  █████   ██████
+# ██       ██   ██    ███  ██         ██    ██   ██ ██    ██
+# ██   ███ ███████   ███   ███████    ██    ███████ ██    ██
+# ██    ██ ██   ██  ███         ██    ██    ██   ██ ██    ██
+#  ██████  ██   ██ ███████ ███████    ██    ██   ██  ██████
+
+print("      ___       _______      ___       ________   _______  __  .______       _______      _______.")
+print("     /   \     |   ____|    /   \     |       /  |   ____||  | |   _  \     |   ____|    /       |")
+print("    /  ^  \    |  |__      /  ^  \    `---/  /   |  |__   |  | |  |_)  |    |  |__      |   (----`")
+print("   /  /_\  \   |   __|    /  /_\  \      /  /    |   __|  |  | |      /     |   __|      \\   \\")
+print("  /  _____  \  |  |      /  _____  \    /  /----.|  |____ |  | |  |\  \----.|  |____ .----)   |  ")
+print(" /__/     \__\ |__|     /__/     \__\  /________||_______||__| | _| `._____||_______||_______/  ")
+
 # Esse programa cria uma lista de tarefas, e adiciona uma nova tarefa ao se digital qualquer frase no prompt
 # Ao usar alguma letra ou palavra reservada, executa as ações determinadas.
 # Ao usar quit ou save, ele cria uma nova chave criptográfica e guarda o arquivo de tarefas criptografado
