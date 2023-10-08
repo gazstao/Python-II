@@ -1,8 +1,17 @@
-edit_message = "Qual tarefa deseja editar? "
-task_message = "Tarefa: "
-delete_task_message = "Qual tarefa deseja apagar? "
-nome_arquivo = 'todolist.txt'
+# Esse programa cria uma lista de tarefas, e adiciona uma nova tarefa ao se digital qualquer frase no prompt
+# Ao usar alguma letra ou palavra reservada, executa as ações determinadas.
+# Ao usar quit ou save, ele cria uma nova chave criptográfica e guarda o arquivo de tarefas criptografado
+# Ao iniciar o programa, tenta carregar uma chave do arquivo, e se der certo tenta descriptografar e carregar as tarefas
 
+from cryptography.fernet import Fernet
+
+print("ToDo v2.0  ",end="")
+
+# mensagens padrão
+edit_message = "Qual tarefa deseja editar? "
+task_message = "\nTarefa: "
+delete_task_message = "Qual tarefa deseja apagar? "
+nome_arquivo = 'todolist.bin'
 help_message = ("\n_____________HELP\n\n(h)elp:   ajuda\n(l)ist:    mostra todas as tarefas\n"
                   "(d)elete:  apaga uma tarefa\n(e)dit:     edita uma tarefa\n"
                   "(s)ave:  save to file\n(clear):  limpa a lista\n"
@@ -10,30 +19,50 @@ help_message = ("\n_____________HELP\n\n(h)elp:   ajuda\n(l)ist:    mostra todas
 
 tarefas = []
 
+# Lista todas as tarefas com um indice
 def list_items():
     # print("_____________ITENS")
     for i, item in enumerate(tarefas, start=1):
         print(f"{i}. {item}")
-    print()
 
+# Grava as tarefas no disco
 def save():
-# SAVE THE FILE TO DISK
-    print(f"\n_____________SAVED TO {nome_arquivo}")
-    with open(nome_arquivo, 'w') as arquivo:
-        for item in tarefas:
-            arquivo.write(f'{item}\n')
+    try:
+        # Gerar nova chave criprográfica
+        chave = Fernet.generate_key()
+        fernet = Fernet(chave)
 
+        # Grava a chave para recuperar o arquivo depois
+        with open('key.bin','wb') as arquivo:
+            arquivo.write(chave)
+
+        # Grava o arquivo criptografado com a chave gerada acima
+        with open(nome_arquivo, 'wb') as arquivo:
+            lista_criptografada = fernet.encrypt('\n'.join(tarefas).encode())
+            arquivo.write(lista_criptografada)
+        print(f"\n_____________SAVED TO {nome_arquivo} KEY {chave}")
+    except Exception as e:
+        print(f"Erro {e}")
+
+# Carrega as tarefas do disco
 def load():
     try:
-        with open(nome_arquivo,'r') as arquivo:
-            for tarefa in arquivo:
-                tarefas.append(tarefa.strip())
-        print("Arquivo de tarefas encontrado. Carregando...")
+        # Se existe, le a chave do disco
+        with open('key.bin','rb') as arquivo:
+            chave = arquivo.read()
+            fernet = Fernet(chave)
+
+        # le o arquivo e descriptografa com a chave obtida anteriormente
+        with open(nome_arquivo,'rb') as arquivo:
+            lista_criptografada = arquivo.read()
+            lista_descriptografada = fernet.decrypt(lista_criptografada).decode()
+            itens = lista_descriptografada.split('\n')
+            for item in itens:
+                tarefas.append(item)
+            print("Arquivo de tarefas encontrado. Carregando...\n")
         list_items()
     except Exception as e:
-        print("Iniciando nova lista...")
-
-print("\nThe_Funcky_ToDoList__a_Python_Experiment\n")
+        print(f"Erro {e}")
 
 # obtem a entrada do usuario e executa a ação desejada
 load()
@@ -46,15 +75,19 @@ while True:
             print(f"TASKS: ",len(tarefas)," tarefas\n")
 
         case 'List' | 'L':
-            print("\n_____________LIST")
-            list_items()
+            if len(tarefas) > 0:
+                list_items()
+            else:
+                print("A lista de tarefas está vazia")
 
         case 'Edit' | 'E':
-            print("\n_____________EDIT")
-            list_items()
-            indice = int(input(edit_message))-1
-            new_task = input("Nova tarefa: ")
-            tarefas[indice] = new_task
+            try:
+                print("\n_____________EDIT")
+                list_items()
+                indice = int(input(edit_message))-1
+                tarefas[indice] = input("Nova tarefa: ")
+            except Exception as e:
+                print(f"Erro {e}")
 
         case 'Delete' | 'Del' | 'D':
             print("\n_____________DELETE")
@@ -63,8 +96,8 @@ while True:
             try:
                 print(f"Apagando {tarefas[indice]}\n")
                 del tarefas[indice]
-            except:
-                print("Verifique o numero da tarefa. Não foi possivel remover. ")
+            except Exception as e:
+                print(f"Erro: {e}")
             list_items()
 
         case 'Save' | 'S':
@@ -82,4 +115,4 @@ while True:
             # print(f"Tarefa adicionada: {user_prompt}")
             tarefas.append(user_prompt)
 
-print("____T_K_S_B_R_O_!_!_!_!___\n")
+# End message
