@@ -11,6 +11,7 @@ import pathlib
 import secrets
 import os
 import base64
+import sys
 import getpass
 import cryptography
 from cryptography.fernet import Fernet
@@ -162,13 +163,18 @@ def decrypt_folder(foldername, key):
 
 if __name__ == '__main__':
     import argparse
+
     parser = argparse.ArgumentParser(description="File Encryptor Script")
-    parser.add_argument("path", help="Path or file to work")
+    parser.add_argument("path", nargs="?",help="Path or file to work", default=None)
     parser.add_argument("-s", "--salt-size", help="If passed, a new salt with the defined size will be generated", type=int)
-    parser.add_argument("-e", "--encrypt", action="store_true", help="Somente -d ou -e pode ser especificada")
-    parser.add_argument("-d", "--decrypt", action="store_true", help="Somente -d ou -e pode ser especificada")
+    parser.add_argument("-e", "--encrypt", action="store_true", help="Criptografa a pasta ou arquivo")
+    parser.add_argument("-d", "--decrypt", action="store_true", help="Descriptografa a pasta ou arquivo")
 
     args = parser.parse_args()
+
+    if args.path is None:
+        print("EXEMPLO DE USO:\npython RansomWhere.py -e folder_teste\npython RansomWhere.py -d folder_teste\npython RansomWhere.py -h")
+        sys.exit()
 
     if args.salt_size:
         key = generate_key(hardcoded_password, salt_size=args.salt_size, save_salt=True)
@@ -192,11 +198,3 @@ if __name__ == '__main__':
             decrypt(args.path, key)
         elif os.path.isdir(args.path):
             decrypt_folder(args.path, key)
-
-    else:
-        raise TypeError("Escolha as opções corretamente.")
-
-# Okay, so we're expecting a total of four parameters, which are the path of the folder/file to encrypt or decrypt, the
-# salt size, which, if passed, generates a new salt with the given size, and whether to encrypt or decrypt via -e or -d
-# parameters respectively.
-
