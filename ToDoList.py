@@ -1,7 +1,9 @@
+from cryptography.fernet import Fernet
+
 edit_message = "Qual tarefa deseja editar? "
 task_message = "Tarefa: "
 delete_task_message = "Qual tarefa deseja apagar? "
-nome_arquivo = 'todolist.txt'
+nome_arquivo = 'todolist.bin'
 
 help_message = ("\n_____________HELP\n\n(h)elp:   ajuda\n(l)ist:    mostra todas as tarefas\n"
                   "(d)elete:  apaga uma tarefa\n(e)dit:     edita uma tarefa\n"
@@ -17,21 +19,38 @@ def list_items():
     print()
 
 def save():
-# SAVE THE FILE TO DISK
-    print(f"\n_____________SAVED TO {nome_arquivo}")
-    with open(nome_arquivo, 'w') as arquivo:
-        for item in tarefas:
-            arquivo.write(f'{item}\n')
+    try:
+        chave = Fernet.generate_key()
+        fernet = Fernet(chave)
+
+        with open('key.bin','wb') as arquivo:
+            arquivo.write(chave)
+
+        with open(nome_arquivo, 'wb') as arquivo:
+            lista_criptografada = fernet.encrypt('\n'.join(tarefas).encode())
+            arquivo.write(lista_criptografada)
+        print(f"\n_____________SAVED TO {nome_arquivo}")
+    except Exception as e:
+        print(f"Erro {e}")
 
 def load():
     try:
-        with open(nome_arquivo,'r') as arquivo:
-            for tarefa in arquivo:
-                tarefas.append(tarefa.strip())
-        print("Arquivo de tarefas encontrado. Carregando...")
+        # le a chave do disco
+        with open('key.bin','rb') as arquivo:
+            chave = arquivo.read()
+            fernet = Fernet(chave)
+
+        # le o arquivo e descriptografa
+        with open(nome_arquivo,'rb') as arquivo:
+            lista_criptografada = arquivo.read()
+            lista_descriptografada = fernet.decrypt(lista_criptografada).decode()
+            itens = lista_descriptografada.split('\n')
+            for item in itens:
+                tarefas.append(item)
+            print("Arquivo de tarefas encontrado. Carregando...")
         list_items()
     except Exception as e:
-        print("Iniciando nova lista...")
+        print(f"Erro {e}")
 
 print("\nThe_Funcky_ToDoList__a_Python_Experiment\n")
 
