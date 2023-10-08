@@ -22,13 +22,13 @@ print("ToDo v2.0  ",end="")
 
 # mensagens padrão
 edit_message = "Qual tarefa deseja editar? "
-task_message = "\nTarefa: "
+task_message = "Tarefa: "
 delete_task_message = "Qual tarefa deseja apagar? "
 nome_arquivo = 'todolist.bin'
 help_message = ("\n_____________HELP\n\n(h)elp:   ajuda\n(l)ist:    mostra todas as tarefas\n"
-                  "(d)elete:  apaga uma tarefa\n(e)dit:     edita uma tarefa\n"
+                  "(d)one/(d)elete:  apaga uma tarefa\n(e)dit:     edita uma tarefa\n"
                   "(s)ave:  save to file\n(clear):  limpa a lista\n"
-                  "Quit:    Encerra o programa\nOutros:  adiciona uma tarefa\n")
+                  "Quit:    Encerra o programa\nDigitar uma tarefa:  adiciona uma tarefa\n")
 
 tarefas = []
 
@@ -53,7 +53,7 @@ def save():
         with open(nome_arquivo, 'wb') as arquivo:
             lista_criptografada = fernet.encrypt('\n'.join(tarefas).encode())
             arquivo.write(lista_criptografada)
-        print(f"\n_____________SAVED TO {nome_arquivo} KEY {chave}")
+        print(f"\n_____________SAVED TO {nome_arquivo} NEW KEY {chave}")
     except Exception as e:
         print(f"Erro {e}")
 
@@ -83,6 +83,7 @@ while True:
     user_prompt = input(task_message)
 
     match user_prompt.capitalize():
+
         case 'Help' | '?' | 'H' | '':
             print(help_message)
             print(f"TASKS: ",len(tarefas)," tarefas\n")
@@ -102,13 +103,13 @@ while True:
             except Exception as e:
                 print(f"Erro {e}")
 
-        case 'Delete' | 'Del' | 'D':
-            print("\n_____________DELETE")
+        case 'Delete' | 'Del' | 'D' | 'Done':
+            print("\n_____________DONE_OR_DELETE")
             list_items()
             indice = int(input(delete_task_message))-1
             try:
                 print(f"Apagando {tarefas[indice]}\n")
-                del tarefas[indice]
+                tarefas.pop(indice)    #del tarefas[indice]
             except Exception as e:
                 print(f"Erro: {e}")
             list_items()
@@ -122,7 +123,7 @@ while True:
 
         case 'Clear':
             print("Limpando a lista de tarefas...")
-            tarefas = []
+            tarefas.clear() # tarefas = []
 
         case _:
             # print(f"Tarefa adicionada: {user_prompt}")
