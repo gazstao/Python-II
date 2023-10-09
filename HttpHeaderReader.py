@@ -4,6 +4,7 @@ import requests
 def getheaders(website: object) -> object:
     try:
         response = requests.get(website, timeout=20)
+        print(f"Website: {website}")
         print(f"\nStatus code: {str(response.status_code)}")
         print("\n___________________Headers: ")
         for header, value in response.headers.items():
@@ -23,8 +24,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.website is None:
-        print("Argumentos faltando! Exemplo de uso:\npython HttpHeaderReader.py 'https://gastao.app.br'\n"
-              "Indo para site padrão")
-        args.website = 'https://www.gastao.app.br'
+        print("Argumentos faltando! Exemplo de uso: $ python HttpHeaderReader.py 'https://gastao.app.br'")
+        args.website = 'http://192.168.0.32:8080'
 
     getheaders(args.website)
