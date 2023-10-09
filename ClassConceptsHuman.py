@@ -11,7 +11,6 @@ class Humano:
     def __init__(self):
         pass
 
-
     # accessors
     def set_altura(self, altura):
         self.altura = altura

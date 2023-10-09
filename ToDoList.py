@@ -28,6 +28,7 @@ help_message = ("\n_____________HELP\n\n(h)elp:   ajuda\n(l)ist:    mostra todas
 
 # Lista todas as tarefas com um indice
 def list_items(_tarefas):
+    """Exibe uma lista no formato í-item"""
     # print("_____________ITENS")
     for i, item in enumerate(_tarefas, start=1):
         print(f"{i}. {item}")
@@ -35,6 +36,7 @@ def list_items(_tarefas):
 
 # Grava as tarefas no disco
 def save(_tarefas, nome_arquivo='todolist.bin'):
+    """Recebe uma lista de tarefas e um nome de arquivo, e grava de modo criptografado a chave e o arquivo"""
     try:
         # Gerar nova chave criprográfica
         chave = Fernet.generate_key()
