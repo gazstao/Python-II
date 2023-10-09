@@ -1,18 +1,16 @@
 # Python-II
 Python Programs
 
-<li>Ransomware Conceptual 
-<li>ToDo List
-
 <pre>
-    ______                 __                        
-  / ____/___ _____  _____/ /_____ _____             
- / / __/ __ `/_  / / ___/ __/ __ `/ __ \            
-/ /_/ / /_/ / / /_(__  ) /_/ /_/ / /_/ /            
-\____/\__,_/ /___/____/\__/\__,_/\____/     ________
-   / __ \__  __/ /_/ /_  ____  ____        /  _/  _/
-  / /_/ / / / / __/ __ \/ __ \/ __ \______ / / / /  
- / ____/ /_/ / /_/ / / / /_/ / / / /_____// /_/ /   
-/_/    \__, /\__/_/ /_/\____/_/ /_/     /___/___/   
-      /____/ 
+   ____               _              
+  / ___| __ _ _______| |_ __ _  ___  
+ | |  _ / _` |_  / __| __/ _` |/ _ \ 
+ | |_| | (_| |/ /\__ \ || (_| | (_) |
+  \____|\__,_/___|___/\__\__,_|\___/ 
+
+All conceptual. very simple funnyware:
+- HttpHeader Reader
+- Lelexia: Alexia Example in progress
+- RansomWhere: Real Ransomware Working Command Line
+- ToDoList: A ToDo List 
 </pre>
