@@ -1,10 +1,14 @@
+import os
+
 import pyfiglet
 import re
 
+dir_padrao = "_AsciiArt"
 
-def html_template():
+
+def html_template(banner):
     return('<!DOCTYPE html><html lang="pt-br"><head><meta charset="UTF-8"><meta name="viewport" '
-           'content="width=device-width, initial-scale=1.0"><title>{banner}</title></head><body><pre>')
+           f'content="width=device-width, initial-scale=1.0"><title>{banner}</title></head><body><pre>')
 
 
 print("\n\n  :::.     .::::::.   .,-:::::  ::::::  :::::::.    :::.   :::.    :::.:::.    :::..,:::::: :::::::..")
@@ -30,9 +34,15 @@ while True:
     n = len(pyfiglet.FigletFont.getFonts())
     print(f"Criando arquivo {banner_name} com banners de {banner} em {n} fontes.")
 
-    # Cria o arquivo
-    file = open(f"_ascii_pure_art_banner_{banner_name}_.html","w")
-    file.write(html_template())
+    # Cria diretorio para arquivos caso não existe e o arquivo
+    try:
+        os.makedirs(dir_padrao)
+        print(f"Criando diretório {dir_padrao}")
+    except Exception as e:
+        pass
+
+    file = open(f"{dir_padrao}/_ascii_pure_art_banner_{banner_name}_.html","w")
+    file.write(html_template(banner))
 
     # Para cada fonte
     for font in pyfiglet.FigletFont.getFonts():
