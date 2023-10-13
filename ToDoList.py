@@ -85,6 +85,7 @@ def load(nome_arquivo='todolist.bin'):
 # tenta carregar as tarefas do arquivo padrão
 tarefas = load()
 
+
 # Repete o loop de entrada do usuário
 while True:
     user_prompt = input("Tarefa: ")
@@ -126,7 +127,7 @@ while True:
         case 'Save' | 'S':
             save(tarefas)
 
-        case 'Quit' | 'Exit':
+        case 'Quit()' | 'Exit()':
             save(tarefas)
             break
 

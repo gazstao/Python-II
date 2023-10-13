@@ -35,5 +35,6 @@ def fale(_texto, _velocidade=130):
 while True:
     print("\nO que quer que eu fale? ", end='')
     el_texto=input()
-
+    if (el_texto == "exit()"):
+        break
     fale(el_texto, 150)

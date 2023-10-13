@@ -159,6 +159,23 @@ def decrypt_folder(foldername, key):
 # |_| |_| |_| \__,_||_||_| |_|
 #
 
+
+def main(dir, type):
+    _key = generate_key(hardcoded_password, load_existing_salt=True)
+    if type=="E":
+        if os.path.isfile(dir):
+            encrypt(dir, _key)
+        elif os.path.isdir(dir):
+            encrypt_folder(dir, _key)
+
+    elif type=="D":
+        if os.path.isfile(dir):
+            decrypt(dir, _key)
+        elif os.path.isdir(dir):
+            decrypt_folder(dir, _key)
+
+
+
 if __name__ == '__main__':
     import argparse
 
