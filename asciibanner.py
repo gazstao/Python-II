@@ -8,11 +8,15 @@ import pyfiglet
 import re
 
 dir_padrao = "_AsciiArt"
-
+html_font_size = "10px"
+html_background_color = "black"
+html_color = "green"
 
 def html_template(banner):
-    return('<!DOCTYPE html><html lang="pt-br"><head><meta charset="UTF-8"><meta name="viewport" '
-           f'content="width=device-width, initial-scale=1.0"><title>{banner}</title></head><body><pre>')
+    return('<!DOCTYPE html><html lang="pt-br"><head><meta charset="UTF-8">\n<meta name="viewport" '
+           f'content="width=device-width, initial-scale=1.0"><title>{banner}</title></head>\n<body>'
+           f'<pre style=font-size: {html_font_size}; background-color: {html_background_color};'
+           f'color: {html_color};>')
 
 
 print("\n\n  :::.     .::::::.   .,-:::::  ::::::  :::::::.    :::.   :::.    :::.:::.    :::..,:::::: :::::::..")
