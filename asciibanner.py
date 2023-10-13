@@ -70,7 +70,7 @@ while True:
         for font in listadefontes:
 
             # Cria banner para a fonte selecionada
-            print(f"Criando banner de  {banner} com a fonte {font}.")
+            print(f"Criando banner de  {banner} com a fonte {font}.", end="\r")
             try:
 
                 file.write(f"\n\n_____ FONTE: {font} _____ BANNER: {banner} _____ SIZE: {html_font_size} _____\n\n")
@@ -79,8 +79,11 @@ while True:
 
             # Caso de erro, trata a excecao para manter o programa em execucao
             except Exception as e:
-                print(f"ERRO: {e}")
-        print("\n\n\n"+pyfiglet.figlet_format(banner, fontealeatoria, width=250))
+                print(f"ERRO: {e}", end="\r")
+        print("                                                               ")
+        print("\n\n\n")
+        pyfiglet.print_figlet(banner, fontealeatoria, "blue", width=250)
+
         # grava o arquivo
         file.write("</pre></body></html>")
         file.close()
