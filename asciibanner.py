@@ -1,6 +1,18 @@
 #
-# ASCIIBANNER is a Python program that takes user input and uses the
-# pyfiglet module to create an HTML file with all the available font options.
+#        ▄▄▄        ██████  ▄████▄   ██▓ ██▓ ▄▄▄▄    ▄▄▄       ███▄    █  ███▄    █ ▓█████  ██▀███
+#       ▒████▄    ▒██    ▒ ▒██▀ ▀█  ▓██▒▓██▒▓█████▄ ▒████▄     ██ ▀█   █  ██ ▀█   █ ▓█   ▀ ▓██ ▒ ██▒
+#       ▒██  ▀█▄  ░ ▓██▄   ▒▓█    ▄ ▒██▒▒██▒▒██▒ ▄██▒██  ▀█▄  ▓██  ▀█ ██▒▓██  ▀█ ██▒▒███   ▓██ ░▄█ ▒
+#       ░██▄▄▄▄██   ▒   ██▒▒▓▓▄ ▄██▒░██░░██░▒██░█▀  ░██▄▄▄▄██ ▓██▒  ▐▌██▒▓██▒  ▐▌██▒▒▓█  ▄ ▒██▀▀█▄
+#        ▓█   ▓██▒▒██████▒▒▒ ▓███▀ ░░██░░██░░▓█  ▀█▓ ▓█   ▓██▒▒██░   ▓██░▒██░   ▓██░░▒████▒░██▓ ▒██▒
+#        ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░░ ░▒ ▒  ░░▓  ░▓  ░▒▓███▀▒ ▒▒   ▓▒█░░ ▒░   ▒ ▒ ░ ▒░   ▒ ▒ ░░ ▒░ ░░ ▒▓ ░▒▓░
+#         ▒   ▒▒ ░░ ░▒  ░ ░  ░  ▒    ▒ ░ ▒ ░▒░▒   ░   ▒   ▒▒ ░░ ░░   ░ ▒░░ ░░   ░ ▒░ ░ ░  ░  ░▒ ░ ▒░
+#         ░   ▒   ░  ░  ░  ░         ▒ ░ ▒ ░ ░    ░   ░   ▒      ░   ░ ░    ░   ░ ░    ░     ░░   ░
+#             ░  ░      ░  ░ ░       ░   ░   ░            ░  ░         ░          ░    ░  ░   ░
+#                          ░                      ░
+#
+# ASCIIBANNER is a Python program that takes user input and uses the pyfiglet module to create a file with
+# ascii art from the desired word, with all the available fonts.
+#
 
 import pyfiglet
 import random
@@ -68,7 +80,7 @@ while True:
             # Caso de erro, trata a excecao para manter o programa em execucao
             except Exception as e:
                 print(f"ERRO: {e}")
-        print("\n\n\n"+pyfiglet.figlet_format(banner, 'big_money-sw', width=250))
+        print("\n\n\n"+pyfiglet.figlet_format(banner, fontealeatoria, width=250))
         # grava o arquivo
         file.write("</pre></body></html>")
         file.close()
