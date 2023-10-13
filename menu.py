@@ -11,29 +11,27 @@ while True:
     print("3 - ToDoList")
     print("4 - RansomWhere")
     menu = input("\nQual sua escolha? ")
-    match menu:
-        case "1":
-            import asciibanner
-            asciibanner
+    if menu == "1":
+        import asciibanner
+        asciibanner
 
-        case "2":
-            import Exia
-            Exia
+    if menu == "2":
+        import Exia
+        Exia
 
-        case "3":
-            import ToDoList
-            ToDoList
+    if menu == "3":
+        import ToDoList
+        ToDoList
 
-        case "4":
-            import RansomWhere
+    if menu == "4":
+        import RansomWhere
 
-            eord = input("(E)ncrypt\n(D)ecrypt\nQual escolhe? ")
-            match eord.capitalize()[0]:
-                case "E":
-                    RansomWhere.main("_AsciiArt","E")
+        eord = input("(E)ncrypt\n(D)ecrypt\nQual escolhe? ")
+        if(eord.capitalize()[0]=="E"):
+            RansomWhere.main("_AsciiArt","E")
 
-                case "D":
-                    RansomWhere.main("_AsciiArt","D")
+        if (eord.capitalize()[0] == "D"):
+            RansomWhere.main("_AsciiArt","D")
 
-        case "exit()":
-            break
+    if menu == "exit()":
+        break
