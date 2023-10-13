@@ -1,7 +1,7 @@
 import pyfiglet
 import random
 
-listadefontes = pyfiglet.FigletFont.getFonts()
+    listadefontes = pyfiglet.FigletFont.getFonts()
 
 while True:
     fontealeatoria =  random.choice(listadefontes)
