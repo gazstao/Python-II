@@ -8,7 +8,6 @@ import keyboard
 listadefontes = pyfiglet.FigletFont.getFonts()
 fonte = "basic"
 largura = 150
-tam = len(banner)
 
 while True:
     print("\n\n\n\n")
