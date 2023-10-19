@@ -1,7 +1,7 @@
 import pyfiglet
 import random
 
-    listadefontes = pyfiglet.FigletFont.getFonts()
+listadefontes = pyfiglet.FigletFont.getFonts()
 
 while True:
     fontealeatoria =  random.choice(listadefontes)
@@ -10,6 +10,7 @@ while True:
     print("2 - Exia")
     print("3 - ToDoList")
     print("4 - RansomWhere")
+    print("9 - Sair")
     menu = input("\nQual sua escolha? ")
     if menu == "1":
         import asciibanner
@@ -33,5 +34,5 @@ while True:
         if (eord.capitalize()[0] == "D"):
             RansomWhere.main("_AsciiArt","D")
 
-    if menu == "exit()":
+    if menu == "9":
         break
