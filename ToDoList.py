@@ -127,7 +127,7 @@ while True:
         case 'Save' | 'S':
             save(tarefas)
 
-        case 'Quit()' | 'Exit()':
+        case 'Quit' | 'Exit':
             save(tarefas)
             break
 

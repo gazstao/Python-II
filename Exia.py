@@ -37,4 +37,7 @@ while True:
     el_texto=input()
     if (el_texto == "exit()"):
         break
-    fale(el_texto, 150)
+    if (el_texto == ''):
+        print("digite exit() para sair")
+    else:
+        fale(el_texto, 150)

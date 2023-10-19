@@ -205,7 +205,7 @@ if __name__ == '__main__':
     _decrypt = args.decrypt
 
     if _encrypt and _decrypt:
-        raise TypeError("Você não pode assobiar e chupar cana. Escolha criptografar ou descriptografar.")
+        raise TypeError("Escolha criptografar OU descriptografar.")
 
     elif _encrypt:
         if os.path.isfile(args.path):

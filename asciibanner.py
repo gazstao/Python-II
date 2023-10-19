@@ -47,7 +47,7 @@ while True:
     if banner == "exit()":
         break
     elif banner == '':
-        pass
+        print("Digite exit() para sair")
     else:
         # ajusta o nome de arquivo para conter somente caracteres validos
         banner_name = re.sub('[^A-Za-z0-9]', '', banner)
