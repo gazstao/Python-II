@@ -11,6 +11,7 @@ while True:
     print("3 - ToDoList")
     print("4 - RansomWhere")
     print("5 - AsciiClock")
+    print("6 - Pesquisa tipo de arquivo pelos bytes iniciais")
     print("\n9 - Sair")
     menu = input("\nQual sua escolha? ")
     if menu == "1":
@@ -38,6 +39,14 @@ while True:
     if menu == "5":
         import clock
         clock.main()
+
+    if menu == "6":
+        import file_signatures
+        dir = input("Diretório: ")
+        try:
+            file_signatures(dir)
+        except Exception as e:
+            print(f"Erro: {e}")
 
     if menu == "9":
         break
