@@ -10,7 +10,8 @@ while True:
     print("2 - Exia")
     print("3 - ToDoList")
     print("4 - RansomWhere")
-    print("9 - Sair")
+    print("5 - AsciiClock")
+    print("\n9 - Sair")
     menu = input("\nQual sua escolha? ")
     if menu == "1":
         import asciibanner
@@ -33,6 +34,10 @@ while True:
 
         if (eord.capitalize()[0] == "D"):
             RansomWhere.main("_AsciiArt","D")
+
+    if menu == "5":
+        import clock
+        clock.main()
 
     if menu == "9":
         break
