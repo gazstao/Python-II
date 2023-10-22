@@ -44,7 +44,7 @@ while True:
         import file_signatures
         dir = input("Diretório: ")
         try:
-            file_signatures(dir)
+            file_signatures.testa_dir(dir)
         except Exception as e:
             print(f"Erro: {e}")
 
